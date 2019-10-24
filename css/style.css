@@ -1,0 +1,40 @@
+body {
+    text-align: center;
+    padding: 2em;
+}
+.wrapper > * {
+  flex: 1 100%;
+}
+
+img.hearts{
+  height: 40px;
+  width: 30px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+
+@media all and (min-width: 300px) {
+  .score {
+  margin-left: 50px;
+  margin-right: 50px; }
+  .hearts {
+  margin-left: 50px;
+  margin-right: 50px;}
+}
+@media all and (min-width: 800px) {
+  .score {
+  margin-left: 250px;
+  margin-right: 250px; }
+  .hearts {
+  margin-left: 250px;
+  margin-right: 250px;}
+}
+@media all and (min-width: 1200px) {
+  .score {
+  margin-left: 450px;
+  margin-right: 450px; }
+  .hearts {
+  margin-left: 450px;
+  margin-right: 450px;}
+}
