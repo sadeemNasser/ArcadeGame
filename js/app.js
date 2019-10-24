@@ -1,19 +1,19 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
+class Enemy{
+    constructor(x, y, speed){
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.sprite = 'images/enemy-bug.png';
+    }
+
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+
+
+     update(dt){
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -35,15 +35,16 @@ Enemy.prototype.update = function(dt) {
         player.collision+=1;
         if(player.score!=0){
           player.score-=10;
-        }
+        }}
+    }//end update function
+    // Draw the enemy on the screen, required method for game
 
-    }
-};
+     render(){
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }//end render function
+}//end class enemy
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -60,6 +61,8 @@ class Player {
 
   }
   update(){
+
+    rating();
     if (this.y > 380) {
         this.y = 380;
     }
@@ -70,7 +73,7 @@ class Player {
         this.x = 0;
     }
     if(this.collision>=15){
-      player.isOver();
+      this.isOver();
     }
 
     // Check for player reaching top of canvas
@@ -80,34 +83,33 @@ class Player {
         this.score+=100;
 
     }
-    rating();
   }//end update function
+    render(){
+       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }//end render function
+    handleInput(keyPress){
+        switch (keyPress) {
+            case 'left':
+                this.x -= this.speed + 50;
+                break;
+            case 'up':
+                this.y -= this.speed + 30;
+                break;
+            case 'right':
+                this.x += this.speed + 50;
+                break;
+            case 'down':
+                this.y += this.speed + 30;
+                break;
+        }       
+    }//end handleInput function 
+    isOver(){
+        alert('hard luck :( \n score : '+ this.score +'\n collision : '+this.collision);
+        player = new Player(200, 380, 50);
+    }//end isOver
 }//end class Player
 
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
 
-Player.prototype.handleInput = function(keyPress) {
-    switch (keyPress) {
-        case 'left':
-            this.x -= this.speed + 50;
-            break;
-        case 'up':
-            this.y -= this.speed + 30;
-            break;
-        case 'right':
-            this.x += this.speed + 50;
-            break;
-        case 'down':
-            this.y += this.speed + 30;
-            break;
-    }
-};
-Player.prototype.isOver=function() {
-        alert('hard luck :( \n score : '+ player.score +'\n collision : '+player.collision);
-        player = new Player(200, 380, 50);
-};
 
 function rating() {
   if( player.collision < 5) {
