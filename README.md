@@ -14,3 +14,7 @@ This game consists of a player character and enemy bugs. The goal of the game is
 * HTML & CSS
 * HTML5 Canvas
 * JavaScript (ES2015)
+## Getting started
+Open the index.html file in any modern browser, click inside the game area, and enjoy playing the game.
+
+
